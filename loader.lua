@@ -33,7 +33,9 @@ local toggles = {
     chests = false,
     playtime = false,
     bubble = false,
-    doggy = false
+    doggy = false,
+    shard = false,
+    reroll = false,
 }
 
 local function createToggle(name)
@@ -177,6 +179,27 @@ shardToggle.MouseButton1Click:Connect(function()
                     remote:FireServer(unpack(args))
                     wait(0.1)
                 end
+            end
+        end)
+    end
+end)
+
+local rerollToggle = createToggle("Free Reroll")
+rerollToggle.MouseButton1Click:Connect(function()
+    toggles.reroll = not toggles.reroll
+    rerollToggle.Text = "Free Reroll: " .. (toggles.reroll and "ON" or "OFF")
+
+    if toggles.reroll then
+        spawn(function()
+            local remote = ReplicatedStorage:WaitForChild("Shared"):WaitForChild("Framework"):WaitForChild("Network"):WaitForChild("Remote"):WaitForChild("Event")
+            local args = {
+                [1] = "ShopFreeReroll",
+                [2] = "alien-shop"
+            }
+
+            while toggles.reroll do
+                remote:FireServer(unpack(args))
+                wait(0.1)
             end
         end)
     end
