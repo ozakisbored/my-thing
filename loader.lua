@@ -17,7 +17,7 @@ toggleButton.Active = true
 toggleButton.Draggable = true
 
 local menu = Instance.new("Frame", mainGui)
-menu.Size = UDim2.new(0, 270, 0, 550)
+menu.Size = UDim2.new(0, 270, 0, 500)
 menu.Position = UDim2.new(0, 150, 0, 100)
 menu.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
 menu.Visible = false
@@ -39,7 +39,6 @@ local toggles = {
     shard = false,
     reroll = false,
     alien = false,
-    x25potions = false
 }
 
 if getgenv().togglesConfig then
