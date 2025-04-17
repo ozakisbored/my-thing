@@ -17,7 +17,7 @@ toggleButton.Active = true
 toggleButton.Draggable = true
 
 local menu = Instance.new("Frame", mainGui)
-menu.Size = UDim2.new(0, 270, 0, 500)
+menu.Size = UDim2.new(0, 270, 0, 550)
 menu.Position = UDim2.new(0, 150, 0, 100)
 menu.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
 menu.Visible = false
@@ -39,6 +39,7 @@ local toggles = {
     shard = false,
     reroll = false,
     alien = false,
+    x25potions = false
 }
 
 if getgenv().togglesConfig then
@@ -142,6 +143,41 @@ createToggle("Free Reroll", "reroll", function()
     while toggles.reroll do
         remote:FireServer("ShopFreeReroll", "alien-shop")
         wait(0.1)
+    end
+end)
+
+createToggle("x25 Potion Auto Use", "x25potions", function()
+    local notifiedEggs = {}
+
+    while toggles.x25potions do
+        for _, egg in ipairs(workspace.Rendered.Rifts:GetChildren()) do
+            if egg:IsA("Model") and egg:FindFirstChild("Display") then
+                local gui = egg.Display:FindFirstChild("SurfaceGui")
+                if gui and gui:FindFirstChild("Icon") then
+                    local icon = gui.Icon
+                    local luck = icon:FindFirstChild("Luck")
+                    if luck and luck.Text == "x25" and not notifiedEggs[egg] then
+                        notifiedEggs[egg] = true
+                        local remote = ReplicatedStorage:WaitForChild("Shared"):WaitForChild("Framework"):WaitForChild("Network"):WaitForChild("Remote"):WaitForChild("Event")
+
+                        local potions = {
+                            {"UsePotion", "Infinity Elixir", 1},
+                            {"UsePotion", "Lucky", 6},
+                            {"UsePotion", "Speed", 6},
+                            {"UsePotion", "Mythic", 6},
+                        }
+
+                        for _, args in ipairs(potions) do
+                            pcall(function()
+                                remote:FireServer(unpack(args))
+                            end)
+                        end
+                        print("[AutoPotions] Fired potions for:", egg.Name)
+                    end
+                end
+            end
+        end
+        task.wait(1)
     end
 end)
 
