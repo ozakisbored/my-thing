@@ -100,9 +100,17 @@ bubbleToggle.MouseButton1Click:Connect(function()
 
     if toggles.bubble then
         spawn(function()
-            local remote = ReplicatedStorage:WaitForChild("Shared"):WaitForChild("Framework"):WaitForChild("Network"):WaitForChild("Remote"):WaitForChild("Event")
+            local remote = ReplicatedStorage:WaitForChild("Shared")
+                :WaitForChild("Framework")
+                :WaitForChild("Network")
+                :WaitForChild("Remote")
+                :WaitForChild("Event")
+            
             while toggles.bubble do
-                remote:FireServer("SellBubble")
+                local args = {
+                    [1] = "SellBubble"
+                }
+                remote:FireServer(unpack(args))
                 wait(0.1)
             end
         end)
