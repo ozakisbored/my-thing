@@ -30,12 +30,13 @@ uiList.FillDirection = Enum.FillDirection.Vertical
 uiList.SortOrder = Enum.SortOrder.LayoutOrder
 
 local toggles = {
-    chests = false,
-    playtime = false,
-    bubble = false,
-    doggy = false,
-    shard = false,
-    reroll = false,
+    chests = true,
+    playtime = true,
+    bubble = true,
+    doggy = true,
+    shard = true,
+    reroll = true,
+    alien = true,
 }
 
 local function createToggle(name)
