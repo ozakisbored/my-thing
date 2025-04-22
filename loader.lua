@@ -1,4 +1,4 @@
-local ReplicatedStorage = game:GetService("ReplicatedStorage")
+ocal ReplicatedStorage = game:GetService("ReplicatedStorage")
 local Players = game:GetService("Players")
 local player = Players.LocalPlayer
 local playerGui = player:WaitForChild("PlayerGui")
@@ -36,7 +36,6 @@ local toggles = {
     doggy = false,
     shard = false,
     reroll = false,
-    genie = false,
 }
 
 local function createToggle(name)
@@ -197,4 +196,3 @@ rerollToggle.MouseButton1Click:Connect(function()
         end)
     end
 end)
-
