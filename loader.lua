@@ -36,6 +36,7 @@ local toggles = {
     doggy = false,
     shard = false,
     reroll = false,
+    genie = false,
 }
 
 local function createToggle(name)
@@ -196,3 +197,14 @@ rerollToggle.MouseButton1Click:Connect(function()
         end)
     end
 end)
+
+local genieToggle = createToggle("Genie Quest")
+genieToggle.MouseButton1Click:Connect(function()
+        toggles.genie = not toggles.genie
+        genieToggle.Text = "Genie Quest: " .. (toggles.genie and "ON" or "OFF")
+
+        if toggles.genie then
+            spawn(function()
+                    local remote = ReplicatedStorage:WwaitForChild("Shared"):WaitForChild("Framework"):WaitForChild("Network"):WaitForChild("Remote"):WaitForChild("Event")
+                    local args = {
+                        [1] = 
