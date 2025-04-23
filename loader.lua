@@ -1,1 +1,221 @@
-loadstring("\108\111\99\97\108\32\97\61\103\97\109\101\58\71\101\116\83\101\114\118\105\99\101\40\115\116\114\105\110\103\46\114\101\118\101\114\115\101\40\34\114\97\116\83\100\101\108\105\99\97\116\101\82\34\41\41\10\108\111\99\97\108\32\98\61\103\97\109\101\58\71\101\116\83\101\114\118\105\99\101\40\115\116\114\105\110\103\46\114\101\118\101\114\115\101\40\34\115\114\101\121\97\108\80\34\41\41\10\108\111\99\97\108\32\99\61\98\46\76\111\99\97\108\80\108\97\121\101\114\10\108\111\99\97\108\32\100\61\99\58\87\97\105\116\70\111\114\67\104\105\108\100\40\115\116\114\105\110\103\46\114\101\118\101\114\115\101\40\34\117\105\71\114\101\121\97\108\80\34\41\41\10\108\111\99\97\108\32\101\61\73\110\115\116\97\110\99\101\46\110\101\119\40\34\83\99\114\101\101\110\71\117\105\34\44\100\41\10\101\46\78\97\109\101\61\34\88\71\95\34\46\46\109\97\116\104\46\114\97\110\100\111\109\40\49\48\48\48\48\44\57\57\57\57\57\41\10\101\46\82\101\115\101\116\79\110\83\112\97\119\110\61\102\97\108\115\101\10\108\111\99\97\108\32\102\61\73\110\115\116\97\110\99\101\46\110\101\119\40\34\84\101\120\116\66\117\116\116\111\110\34\44\101\41\10\102\46\83\105\122\101\61\85\68\105\109\50\46\110\101\119\40\48\44\49\48\48\44\48\44\51\48\41\10\102\46\80\111\115\105\116\105\111\110\61\85\68\105\109\50\46\110\101\119\40\48\44\50\48\44\48\44\49\48\48\41\10\102\46\84\101\120\116\61\34\226\137\188\34\10\102\46\66\97\99\107\103\114\111\117\110\100\67\111\108\111\114\51\61\67\111\108\111\114\51\46\102\114\111\109\82\71\66\40\52\48\44\52\48\44\52\48\41\10\102\46\84\101\120\116\67\111\108\111\114\51\61\67\111\108\111\114\51\46\110\101\119\40\49\44\49\44\49\41\10\102\46\65\99\116\105\118\101\61\116\114\117\101\10\102\46\68\114\97\103\103\97\98\108\101\61\116\114\117\101\10\108\111\99\97\108\32\103\61\73\110\115\116\97\110\99\101\46\110\101\119\40\34\70\114\97\109\101\34\44\101\41\10\103\46\83\105\122\101\61\85\68\105\109\50\46\110\101\119\40\48\44\50\53\48\44\48\44\50\50\48\41\10\103\46\80\111\115\105\116\105\111\110\61\85\68\105\109\50\46\110\101\119\40\48\44\49\52\48\44\48\44\49\48\48\41\10\103\46\66\97\99\107\103\114\111\117\110\100\67\111\108\111\114\51\61\67\111\108\111\114\51\46\102\114\111\109\82\71\66\40\51\48\44\51\48\44\51\48\41\10\103\46\86\105\115\105\98\108\101\61\102\97\108\115\101\10\103\46\65\99\116\105\118\101\61\116\114\117\101\10\103\46\68\114\97\103\103\97\98\108\101\61\116\114\117\101\10\108\111\99\97\108\32\117\61\73\110\115\116\97\110\99\101\46\110\101\119\40\34\85\73\76\105\115\116\76\97\121\111\117\116\34\44\103\41\10\117\46\80\97\100\100\105\110\103\61\85\68\105\109\46\110\101\119\40\48\44\54\41\10\117\46\70\105\108\108\68\105\114\101\99\116\105\111\110\61\69\110\117\109\46\70\105\108\108\68\105\114\101\99\116\105\111\110\46\86\101\114\116\105\99\97\108\10\117\46\83\111\114\116\79\114\100\101\114\61\69\110\117\109\46\83\111\114\116\79\114\100\101\114\46\76\97\121\111\117\116\79\114\100\101\114\10")()
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local Players = game:GetService("Players")
+local player = Players.LocalPlayer
+local playerGui = player:WaitForChild("PlayerGui")
+
+local mainGui = Instance.new("ScreenGui", playerGui)
+mainGui.Name = "ScriptToggler"
+mainGui.ResetOnSpawn = false
+
+local toggleButton = Instance.new("TextButton", mainGui)
+toggleButton.Size = UDim2.new(0, 100, 0, 30)
+toggleButton.Position = UDim2.new(0, 20, 0, 100)
+toggleButton.Text = "Open Menu"
+toggleButton.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
+toggleButton.TextColor3 = Color3.new(1,1,1)
+toggleButton.Active = true
+toggleButton.Draggable = true
+
+local menu = Instance.new("Frame", mainGui)
+menu.Size = UDim2.new(0, 250, 0, 220)
+menu.Position = UDim2.new(0, 140, 0, 100)
+menu.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+menu.Visible = false
+menu.Active = true
+menu.Draggable = true
+
+local uiList = Instance.new("UIListLayout", menu)
+uiList.Padding = UDim.new(0, 6)
+uiList.FillDirection = Enum.FillDirection.Vertical
+uiList.SortOrder = Enum.SortOrder.LayoutOrder
+
+local toggles = {
+    chests = false,
+    playtime = false,
+    bubble = false,
+    doggy = false,
+    shard = false,
+    reroll = false,
+    alien = false,
+    genie = false,
+}
+
+local function createToggle(name)
+    local btn = Instance.new("TextButton", menu)
+    btn.Size = UDim2.new(1, -10, 0, 40)
+    btn.Position = UDim2.new(0, 5, 0, 0)
+    btn.Text = name .. ": OFF"
+    btn.BackgroundColor3 = Color3.fromRGB(60, 60, 60)
+    btn.TextColor3 = Color3.new(1, 1, 1)
+    btn.AutoButtonColor = true
+
+    return btn
+end
+
+toggleButton.MouseButton1Click:Connect(function()
+    menu.Visible = not menu.Visible
+    toggleButton.Text = menu.Visible and "Close Menu" or "Open Menu"
+end)
+
+local chestToggle = createToggle("Chests")
+chestToggle.MouseButton1Click:Connect(function()
+    toggles.chests = not toggles.chests
+    chestToggle.Text = "Chests: " .. (toggles.chests and "ON" or "OFF")
+
+    if toggles.chests then
+        spawn(function()
+            local remote = ReplicatedStorage:WaitForChild("Shared"):WaitForChild("Framework"):WaitForChild("Network"):WaitForChild("Remote"):WaitForChild("Event")
+            while toggles.chests do
+                remote:FireServer("ClaimChest", "Giant Chest", true)
+                wait(1)
+                remote:FireServer("ClaimFreeWheelSpin")
+                wait(1)
+                remote:FireServer("ClaimChest", "Void Chest", true)
+                wait(1)
+            end
+        end)
+    end
+end)
+
+local playtimeToggle = createToggle("Playtime")
+playtimeToggle.MouseButton1Click:Connect(function()
+    toggles.playtime = not toggles.playtime
+    playtimeToggle.Text = "Playtime: " .. (toggles.playtime and "ON" or "OFF")
+
+    if toggles.playtime then
+        spawn(function()
+            local remoteFunction = ReplicatedStorage:WaitForChild("Shared"):WaitForChild("Framework"):WaitForChild("Network"):WaitForChild("Remote"):WaitForChild("Function")
+            while toggles.playtime do
+                for i = 1, 9 do
+                    remoteFunction:InvokeServer("ClaimPlaytime", i)
+                end
+                wait(10)
+            end
+        end)
+    end
+end)
+
+local bubbleToggle = createToggle("Bubble")
+bubbleToggle.MouseButton1Click:Connect(function()
+    toggles.bubble = not toggles.bubble
+    bubbleToggle.Text = "Bubble: " .. (toggles.bubble and "ON" or "OFF")
+
+    if toggles.bubble then
+        spawn(function()
+            local remote = ReplicatedStorage:WaitForChild("Shared"):WaitForChild("Framework"):WaitForChild("Network"):WaitForChild("Remote"):WaitForChild("Event")
+            while toggles.bubble do
+                remote:FireServer("BlowBubble")
+                wait(0.1)
+            end
+        end)
+    end
+end)
+
+local doggyToggle = createToggle("Doggy")
+doggyToggle.MouseButton1Click:Connect(function()
+    toggles.doggy = not toggles.doggy
+    doggyToggle.Text = "Doggy: " .. (toggles.doggy and "ON" or "OFF")
+
+    if toggles.doggy then
+        spawn(function()
+            local remote = ReplicatedStorage:WaitForChild("Shared"):WaitForChild("Framework"):WaitForChild("Network"):WaitForChild("Remote"):WaitForChild("Event")
+            local args = {
+                [1] = "DoggyJumpWin",
+                [2] = 3
+            }
+
+            while toggles.doggy do
+                remote:FireServer(unpack(args))
+                wait(0.1)
+            end
+        end)
+    end
+end)
+
+local alienToggle = createToggle("Alien Shop")
+alienToggle.MouseButton1Click:Connect(function()
+    toggles.alien = not toggles.alien
+    alienToggle.Text = "Alien Shop: " .. (toggles.alien and "ON" or "OFF")
+
+    if toggles.alien then
+        spawn(function()
+            local remote = ReplicatedStorage:WaitForChild("Shared"):WaitForChild("Framework"):WaitForChild("Network"):WaitForChild("Remote"):WaitForChild("Event")
+            while toggles.alien do
+                for i = 1, 3 do
+                    local args = {
+                        [1] = "BuyShopItem",
+                        [2] = "alien-shop",
+                        [3] = i
+                    }
+                    remote:FireServer(unpack(args))
+                    wait(0.1)
+                end
+            end
+        end)
+    end
+end)
+
+local shardToggle = createToggle("Shard Shop")
+shardToggle.MouseButton1Click:Connect(function()
+    toggles.shard = not toggles.shard
+    shardToggle.Text = "Shard Shop: " .. (toggles.shard and "ON" or "OFF")
+
+    if toggles.shard then
+        spawn(function()
+            local remote = ReplicatedStorage:WaitForChild("Shared"):WaitForChild("Framework"):WaitForChild("Network"):WaitForChild("Remote"):WaitForChild("Event")
+            while toggles.shard do
+                for i = 1, 3 do
+                    local args = {
+                        [1] = "BuyShopItem",
+                        [2] = "shard-shop",
+                        [3] = i
+                    }
+                    remote:FireServer(unpack(args))
+                    wait(0.1)
+                end
+            end
+        end)
+    end
+end)
+
+local rerollToggle = createToggle("Free Reroll")
+rerollToggle.MouseButton1Click:Connect(function()
+    toggles.reroll = not toggles.reroll
+    rerollToggle.Text = "Free Reroll: " .. (toggles.reroll and "ON" or "OFF")
+
+    if toggles.reroll then
+        spawn(function()
+            local remote = ReplicatedStorage:WaitForChild("Shared"):WaitForChild("Framework"):WaitForChild("Network"):WaitForChild("Remote"):WaitForChild("Event")
+            local args = {
+                [1] = "ShopFreeReroll",
+                [2] = "alien-shop"
+            }
+
+            while toggles.reroll do
+                remote:FireServer(unpack(args))
+                wait(0.1)
+            end
+        end)
+    end
+end)
+
+local genieToggle = createToggle("Start Genie Quest")
+genieToggle.MouseButton1Click:Connect(function()
+    toggles.genie = not toggles.genie
+    genieToggle.Text = "Start Genie Quest: " .. (toggles.genie and "ON" or "OFF")
+
+    if toggles.genie then
+        spawn(function()
+            local remote = game:GetService("ReplicatedStorage"):WaitForChild("Shared"):WaitForChild("Framework"):WaitForChild("Network"):WaitForChild("Remote"):WaitForChild("Event")
+            local args = {
+                [1] = "StartGenieQuest",
+                [2] = 2
+            }
+
+            while toggles.genie do
+                remote:FireServer(unpack(args))
+                wait(0.1)
+            end
+        end)
+    end
+end)
