@@ -67,11 +67,11 @@ chestToggle.MouseButton1Click:Connect(function()
             local remote = ReplicatedStorage:WaitForChild("Shared"):WaitForChild("Framework"):WaitForChild("Network"):WaitForChild("Remote"):WaitForChild("Event")
             while toggles.chests do
                 remote:FireServer("ClaimChest", "Giant Chest", true)
-                wait(1)
+                wait(2)
                 remote:FireServer("ClaimFreeWheelSpin")
-                wait(1)
+                wait(2)
                 remote:FireServer("ClaimChest", "Void Chest", true)
-                wait(1)
+                wait(2)
             end
         end)
     end
@@ -126,7 +126,7 @@ doggyToggle.MouseButton1Click:Connect(function()
 
             while toggles.doggy do
                 remote:FireServer(unpack(args))
-                wait(0.1)
+                wait(2)
             end
         end)
     end
@@ -148,7 +148,7 @@ alienToggle.MouseButton1Click:Connect(function()
                         [3] = i
                     }
                     remote:FireServer(unpack(args))
-                    wait(0.1)
+                    wait(2)
                 end
             end
         end)
@@ -171,7 +171,7 @@ shardToggle.MouseButton1Click:Connect(function()
                         [3] = i
                     }
                     remote:FireServer(unpack(args))
-                    wait(0.1)
+                    wait(2)
                 end
             end
         end)
@@ -193,7 +193,7 @@ rerollToggle.MouseButton1Click:Connect(function()
 
             while toggles.reroll do
                 remote:FireServer(unpack(args))
-                wait(0.1)
+                wait(30)
             end
         end)
     end
@@ -214,7 +214,7 @@ genieToggle.MouseButton1Click:Connect(function()
 
             while toggles.genie do
                 remote:FireServer(unpack(args))
-                wait(0.1)
+                wait(2)
             end
         end)
     end
