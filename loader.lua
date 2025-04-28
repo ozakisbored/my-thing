@@ -72,6 +72,8 @@ chestToggle.MouseButton1Click:Connect(function()
                 wait(1)
                 remote:FireServer("ClaimChest", "Void Chest", true)
                 wait(1)
+                remote:FireServer("ClaimChest", "Infinity Chest", true)
+                wait(1)
             end
         end)
     end
