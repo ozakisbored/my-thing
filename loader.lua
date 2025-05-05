@@ -38,6 +38,7 @@ local toggles = {
     reroll = false,
     alien = false,
     genie = false,
+    claw = false,
 }
 
 local function createToggle(name)
@@ -217,6 +218,33 @@ genieToggle.MouseButton1Click:Connect(function()
             while toggles.genie do
                 remote:FireServer(unpack(args))
                 wait(0.1)
+            end
+        end)
+    end
+end)
+
+local clawToggle = createToggle("Use Robot Claw")
+clawToggle.MouseButton1Click:Connect(function()
+    toggles.claw = not toggles.claw
+    clawToggle.Text = "Use Robot Claw: " .. (toggles.claw and "ON" or "OFF")
+
+    if toggles.claw then
+        spawn(function()
+            local remote = game:GetService("ReplicatedStorage")
+                :WaitForChild("Shared")
+                :WaitForChild("Framework")
+                :WaitForChild("Network")
+                :WaitForChild("Remote")
+                :WaitForChild("Event")
+            
+            local args = {
+                "SkipMinigameCooldown",
+                "Robot Claw"
+            }
+
+            while toggles.claw do
+                remote:FireServer(unpack(args))
+                wait(1)
             end
         end)
     end
